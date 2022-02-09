@@ -5,6 +5,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET
+    @GET("films.json")
     fun getMovies(): Call<ListMovieNetworkEntity>
 }
