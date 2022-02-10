@@ -49,8 +49,6 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        checkInternet()
-
         initListeners()
     }
 
@@ -65,9 +63,9 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
     }
 
     //эту часть логики думаю можно оставить во View
-    //потому что она требует контекст и если ее разбивать код рискует стать не читаемым
+    //потому что она требует контекст и если ее разбивать, код рискует стать не читаемым
     //а передача контекста в презентр может быть опасна из за утечки памяти
-    private fun checkInternet() {
+    override fun checkInternet() {
         if (isInternetAvailable(requireActivity().applicationContext)) {
             presenter.getMovieList()
         } else {
@@ -122,5 +120,6 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        job?.cancel()
     }
 }

@@ -75,7 +75,7 @@ class MainMenuAdapter(private val itemClick: (item: BaseEntity) -> Unit): Recycl
 
         fun bind(movie: MovieEntity) = with(binding){
             movieName.text = movie.localizedName
-            Glide.with(root).load(movie.imageUrl).into(image)
+            Glide.with(root).load(movie.imageUrl).placeholder(R.drawable.placeholder).error(R.drawable.error_image).into(image)
             movieContainer.setOnClickListener {
                 itemClick(movie)
             }

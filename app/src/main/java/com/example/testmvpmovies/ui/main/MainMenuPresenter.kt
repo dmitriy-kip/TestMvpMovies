@@ -16,6 +16,11 @@ class MainMenuPresenter @Inject constructor(private val dataManager: DataManager
 
     private var infoList: List<BaseEntity>? = null
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.checkInternet()
+    }
+
     fun itemClick(item: BaseEntity) {
         if (item is MovieEntity) {
             viewState.clickMovie(item)
