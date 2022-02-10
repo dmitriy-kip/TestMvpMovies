@@ -1,5 +1,6 @@
-package com.example.testmvpmovies.data
+package com.example.testmvpmovies.di
 
+import com.example.testmvpmovies.data.DataManager
 import com.example.testmvpmovies.data.network.InternetClient
 import com.example.testmvpmovies.utils.BASE_URL
 import dagger.Module
