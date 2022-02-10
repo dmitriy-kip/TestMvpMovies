@@ -11,7 +11,12 @@ import com.example.testmvpmovies.databinding.FragmentMainMenuBinding
 import com.example.testmvpmovies.ui.entities.BaseEntity
 import com.example.testmvpmovies.ui.main.adapter.MainMenuAdapter
 import com.example.testmvpmovies.utils.ViewTypes
+import com.example.testmvpmovies.utils.delay
+import com.example.testmvpmovies.utils.isInternetAvailable
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
@@ -31,6 +36,7 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
     }
 
     private var adapter: MainMenuAdapter? = null
+    private var job: Job? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,23 +46,60 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
         return binding.root
     }
 
-    override fun listReady(list: List<BaseEntity>?) {
-        if (list == null) {
-            return
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        checkInternet()
+
+        initListeners()
+    }
+
+    private fun initListeners() = with(binding) {
+        tryAgainButton.setOnClickListener {
+            errorText.visibility = View.GONE
+            tryAgainButton.visibility = View.GONE
+            progressBar.visibility = View.VISIBLE
+
+            presenter.getMovieList()
+        }
+    }
+
+    //эту часть логики думаю можно оставить во View
+    //потому что она требует контекст и если ее разбивать код рискует стать не читаемым
+    //а передача контекста в презентр может быть опасна из за утечки памяти
+    private fun checkInternet() {
+        if (isInternetAvailable(requireActivity().applicationContext)) {
+            presenter.getMovieList()
+        } else {
+            binding.internetErrorText.visibility = View.VISIBLE
+            job = delay(CoroutineScope(Dispatchers.IO), 1000, Dispatchers.IO, true) {
+                if (isInternetAvailable(requireActivity().applicationContext)) {
+                    presenter.getMovieList()
+                    job?.cancel()
+                }
+            }
+        }
+    }
+
+    override fun listReady(list: List<BaseEntity>) = with(binding) {
         initRecyclerView(list)
 
-        binding.menuRecycler.visibility = View.VISIBLE
-        binding.progressBar.visibility = View.GONE
+        menuRecycler.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
+        internetErrorText.visibility = View.GONE
     }
 
     override fun clickMovie(movie: MovieEntity) {
-        TODO("Not yet implemented")
     }
 
     override fun clickGenre(list: List<BaseEntity>) {
         adapter?.infoList = list
+    }
+
+    override fun errorLoading() {
+        binding.progressBar.visibility = View.GONE
+        binding.errorText.visibility = View.VISIBLE
+        binding.tryAgainButton.visibility = View.VISIBLE
     }
 
     private fun initRecyclerView(list: List<BaseEntity>) {

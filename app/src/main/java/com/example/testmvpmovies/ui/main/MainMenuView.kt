@@ -8,9 +8,11 @@ import moxy.viewstate.strategy.alias.Skip
 
 interface MainMenuView: MvpView {
     @AddToEnd
-    fun listReady(list: List<BaseEntity>?)
+    fun listReady(list: List<BaseEntity>)
     @Skip
     fun clickMovie(movie: MovieEntity)
     @AddToEnd
     fun clickGenre(list: List<BaseEntity>)
+    @AddToEnd
+    fun errorLoading()
 }

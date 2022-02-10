@@ -16,27 +16,6 @@ class MainMenuPresenter @Inject constructor(private val dataManager: DataManager
 
     private var infoList: List<BaseEntity>? = null
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
-        dataManager.getMovies { movieList ->
-            if (movieList == null) {
-                viewState.listReady(null)
-                return@getMovies
-            }
-
-            val movies = movieList.sortedBy { it.localizedName }
-
-            val resultList = mutableListOf<BaseEntity>()
-            resultList.add(HeaderEntity(R.string.genre))
-            resultList.addAll(getGenreList(movies))
-            resultList.add(HeaderEntity(R.string.movie))
-            resultList.addAll(movies)
-
-            this.infoList = resultList
-            viewState.listReady(resultList)
-        }
-    }
-
     fun itemClick(item: BaseEntity) {
         if (item is MovieEntity) {
             viewState.clickMovie(item)
@@ -57,6 +36,26 @@ class MainMenuPresenter @Inject constructor(private val dataManager: DataManager
         }
     }
 
+    fun getMovieList() {
+        dataManager.getMovies { movieList ->
+            if (movieList == null) {
+                viewState.errorLoading()
+                return@getMovies
+            }
+
+            val movies = movieList.sortedBy { it.localizedName }
+
+            val resultList = mutableListOf<BaseEntity>()
+            resultList.add(HeaderEntity(R.string.genre))
+            resultList.addAll(getGenreList(movies))
+            resultList.add(HeaderEntity(R.string.movie))
+            resultList.addAll(movies)
+
+            this.infoList = resultList
+            viewState.listReady(resultList)
+        }
+    }
+
     private fun getGenreList(list: List<MovieEntity>): List<GenreEntity> {
         val genreListTmp = mutableListOf<String>()
         for (item in list) {
@@ -69,6 +68,4 @@ class MainMenuPresenter @Inject constructor(private val dataManager: DataManager
         }
         return genreList
     }
-
-
 }
