@@ -10,15 +10,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class SingleActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var dataManager: DataManager
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_single)
-
-        dataManager.getMovies {
-            Log.e("TEST", it.toString())
-        }
     }
 }

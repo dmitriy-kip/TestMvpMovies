@@ -1,5 +1,5 @@
 package com.example.testmvpmovies.ui.entities
 
 data class HeaderEntity(
-    val name: String
+    val name: Int
 ): BaseEntity()

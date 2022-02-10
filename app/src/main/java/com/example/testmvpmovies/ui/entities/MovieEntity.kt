@@ -8,6 +8,5 @@ data class MovieEntity(
     val rating: Double?,
     val imageUrl: String?,
     val description: String?,
-    val genres: List<String>,
-    val isClicked: Boolean = false
+    val genres: List<String>
 ): BaseEntity()

@@ -1,6 +1,7 @@
 package com.example.testmvpmovies.ui.main.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
@@ -16,7 +17,7 @@ import com.example.testmvpmovies.ui.entities.HeaderEntity
 import com.example.testmvpmovies.utils.ViewTypes
 import com.example.testmvpmovies.ui.entities.MovieEntity
 
-class MainAdapter(private val itemClick: (item: BaseEntity) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainMenuAdapter(private val itemClick: (item: BaseEntity) -> Unit): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var infoList = listOf<BaseEntity>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
@@ -24,16 +25,16 @@ class MainAdapter(private val itemClick: (item: BaseEntity) -> Unit): RecyclerVi
             notifyDataSetChanged()
         }
 
-    class LiableViewHolder(private val binding: ItemHeaderBinding): RecyclerView.ViewHolder(binding.root) {
+    class HeaderViewHolder(private val binding: ItemHeaderBinding): RecyclerView.ViewHolder(binding.root) {
         companion object {
-            fun create(parent: ViewGroup): LiableViewHolder {
+            fun create(parent: ViewGroup): HeaderViewHolder {
                 val binding = ItemHeaderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-                return LiableViewHolder(binding)
+                return HeaderViewHolder(binding)
             }
         }
 
         fun bind(header: HeaderEntity) {
-            binding.headerName.text = header.name
+            binding.headerName.text = binding.root.resources.getString(header.name)
         }
     }
 
@@ -85,7 +86,7 @@ class MainAdapter(private val itemClick: (item: BaseEntity) -> Unit): RecyclerVi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             ViewTypes.GENRE_VT.ordinal -> GenreViewHolder.create(parent, itemClick)
-            ViewTypes.LIABLE_VT.ordinal -> LiableViewHolder.create(parent)
+            ViewTypes.HEADER_VT.ordinal -> HeaderViewHolder.create(parent)
             else -> MovieViewHolder.create(parent, itemClick)
         }
     }
@@ -97,7 +98,7 @@ class MainAdapter(private val itemClick: (item: BaseEntity) -> Unit): RecyclerVi
                 holder.bind(infoList[position] as GenreEntity)
             }
             is HeaderEntity -> {
-                holder as LiableViewHolder
+                holder as HeaderViewHolder
                 holder.bind(infoList[position] as HeaderEntity)
             }
             is MovieEntity -> {
@@ -112,7 +113,7 @@ class MainAdapter(private val itemClick: (item: BaseEntity) -> Unit): RecyclerVi
     override fun getItemViewType(position: Int): Int {
         return when(infoList[position]) {
             is GenreEntity -> ViewTypes.GENRE_VT.ordinal
-            is HeaderEntity -> ViewTypes.LIABLE_VT.ordinal
+            is HeaderEntity -> ViewTypes.HEADER_VT.ordinal
             else -> ViewTypes.MOVIE_VT.ordinal
         }
     }
