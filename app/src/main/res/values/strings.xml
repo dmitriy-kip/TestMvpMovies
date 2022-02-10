@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TestMvpMovies</string>
+    <string name="main_title">Home</string>
 </resources>

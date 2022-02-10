@@ -1,6 +1,6 @@
 package com.example.testmvpmovies.ui.main
 
-import com.example.testmvpmovies.MovieEntity
+import com.example.testmvpmovies.ui.entities.MovieEntity
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEnd
 import moxy.viewstate.strategy.alias.Skip

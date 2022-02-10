@@ -1,4 +1,4 @@
-package com.example.testmvpmovies
+package com.example.testmvpmovies.ui.entities
 
 data class MovieEntity(
     val id: Int,
@@ -10,4 +10,4 @@ data class MovieEntity(
     val description: String?,
     val genres: List<String>,
     val isClicked: Boolean = false
-)
+): BaseEntity()
