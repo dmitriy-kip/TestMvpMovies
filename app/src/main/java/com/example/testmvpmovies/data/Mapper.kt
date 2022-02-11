@@ -1,7 +1,7 @@
 package com.example.testmvpmovies.data
 
-import com.example.testmvpmovies.MovieEntity
 import com.example.testmvpmovies.data.network.entities.MovieNetworkEntity
+import com.example.testmvpmovies.ui.entities.MovieEntity
 
 fun MovieNetworkEntity.toMovieEntity() = MovieEntity(
     id,
