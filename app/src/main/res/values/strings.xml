@@ -6,6 +6,6 @@
     <string name="try_again">Try again</string>
     <string name="error_text">Something went wrong.\nPlease try again later.</string>
     <string name="check_your_internet_connection">Check your internet connection</string>
-    <string name="year_movie">Year: %s</string>
+    <string name="year_movie">Year: %d</string>
     <string name="rating_movie">Rating: %s</string>
 </resources>
