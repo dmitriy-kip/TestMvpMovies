@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.testmvpmovies.R
 import com.example.testmvpmovies.ui.entities.MovieEntity
 import com.example.testmvpmovies.databinding.FragmentMainMenuBinding
 import com.example.testmvpmovies.ui.entities.BaseEntity
@@ -93,6 +95,7 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
     }
 
     override fun clickMovie(movie: MovieEntity) {
+        requireActivity().findNavController(R.id.mainFragmentContainer).navigate(MainMenuFragmentDirections.actionMainMenuFragmentToMovieFragment(movie))
     }
 
     override fun errorLoading() {
