@@ -1,6 +1,5 @@
 package com.example.testmvpmovies.ui.main
 
-import android.util.Log
 import com.example.testmvpmovies.R
 import com.example.testmvpmovies.data.DataManager
 import com.example.testmvpmovies.ui.entities.BaseEntity

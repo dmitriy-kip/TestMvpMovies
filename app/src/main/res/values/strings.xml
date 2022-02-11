@@ -8,4 +8,5 @@
     <string name="check_your_internet_connection">Check your internet connection</string>
     <string name="year_movie">Year: %d</string>
     <string name="rating_movie">Rating: %s</string>
+    <string name="image" translatable="false">Image</string>
 </resources>
