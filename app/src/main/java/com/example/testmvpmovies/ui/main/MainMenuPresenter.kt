@@ -37,7 +37,7 @@ class MainMenuPresenter @Inject constructor(private val dataManager: DataManager
                 }
                 clickedInfoList.add(infoItem)
             }
-            viewState.clickGenre(clickedInfoList)
+            viewState.listReady(clickedInfoList)
         }
     }
 

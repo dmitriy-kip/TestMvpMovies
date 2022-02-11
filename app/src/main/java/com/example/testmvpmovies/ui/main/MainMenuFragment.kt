@@ -49,7 +49,12 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
         initListeners()
+    }
+
+    private fun initViews() {
+        initRecyclerView()
     }
 
     private fun initListeners() = with(binding) {
@@ -80,7 +85,7 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
     }
 
     override fun listReady(list: List<BaseEntity>) = with(binding) {
-        initRecyclerView(list)
+        adapter?.infoList = list
 
         menuRecycler.visibility = View.VISIBLE
         progressBar.visibility = View.GONE
@@ -90,17 +95,13 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
     override fun clickMovie(movie: MovieEntity) {
     }
 
-    override fun clickGenre(list: List<BaseEntity>) {
-        adapter?.infoList = list
-    }
-
     override fun errorLoading() {
         binding.progressBar.visibility = View.GONE
         binding.errorText.visibility = View.VISIBLE
         binding.tryAgainButton.visibility = View.VISIBLE
     }
 
-    private fun initRecyclerView(list: List<BaseEntity>) {
+    private fun initRecyclerView() {
         adapter = MainMenuAdapter{ onItemClick(it) }
         val gridLayoutManager = GridLayoutManager(requireContext(), 2)
         gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -114,7 +115,6 @@ class MainMenuFragment : MvpAppCompatFragment(), MainMenuView {
         }
         binding.menuRecycler.layoutManager = gridLayoutManager
         binding.menuRecycler.adapter = adapter
-        adapter?.infoList = list
     }
 
     override fun onDestroy() {

@@ -11,8 +11,6 @@ interface MainMenuView: MvpView {
     @Skip
     fun clickMovie(movie: MovieEntity)
     @AddToEnd
-    fun clickGenre(list: List<BaseEntity>)
-    @AddToEnd
     fun errorLoading()
     @AddToEnd
     fun checkInternet()
