@@ -9,5 +9,18 @@
         android:id="@+id/mainMenuFragment"
         android:name="com.example.testmvpmovies.ui.main.MainMenuFragment"
         android:label="fragment_main_menu"
-        tools:layout="@layout/fragment_main_menu" />
+        tools:layout="@layout/fragment_main_menu" >
+        <action
+            android:id="@+id/action_mainMenuFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.example.testmvpmovies.ui.movie.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" >
+        <argument
+            android:name="movie"
+            app:argType="com.example.testmvpmovies.ui.entities.MovieEntity" />
+    </fragment>
 </navigation>
