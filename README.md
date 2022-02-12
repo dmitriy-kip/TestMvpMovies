@@ -6,8 +6,8 @@ Version 1.0.0
 
 An application for displaying a list of movies and viewing information about them.
 The application consists of two screens:
-List of movies with filter;
-Detailed information about the film.
+list of movies with filter,
+detailed information about the film.
 
 Development language:Kotlin
 Minimum Android Version: 5.1
