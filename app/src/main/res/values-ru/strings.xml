@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">TestMvpMovies</string>
     <string name="main_title">Главная</string>
-    <string name="genre">Жанр</string>
-    <string name="movie">Фильм</string>
+    <string name="genre">Жанры</string>
+    <string name="movie">Фильмы</string>
     <string name="try_again">Ещё раз</string>
     <string name="error_text">Что то пошло не так. Попробуйте еще раз позже.</string>
     <string name="check_your_internet_connection">Проверте подключение к интернету</string>

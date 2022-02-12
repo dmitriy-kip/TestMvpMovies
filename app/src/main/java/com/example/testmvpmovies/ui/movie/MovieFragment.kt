@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.testmvpmovies.R
 import com.example.testmvpmovies.databinding.FragmentMovieBinding
 import com.example.testmvpmovies.ui.entities.MovieEntity
+import com.example.testmvpmovies.utils.hideIfNullWhenSetText
 
 class MovieFragment : Fragment() {
     private var _binding: FragmentMovieBinding? = null
@@ -42,7 +43,7 @@ class MovieFragment : Fragment() {
         toolBar.title = movie.localizedName
         nameMovie.text = movie.name
         yearMovie.text = resources.getString(R.string.year_movie, movie.year)
-        ratingMovie.text = resources.getString(R.string.rating_movie, movie.rating.toString())
+        ratingMovie.hideIfNullWhenSetText(movie.rating)
         descriptionMovie.text = movie.description
     }
 
