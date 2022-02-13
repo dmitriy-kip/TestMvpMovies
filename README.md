@@ -1,5 +1,6 @@
 # TestMvpMovies
-**The APK file with the application is located in the release branch in the root folder**
+**The APK file with the application is located in the [release](https://github.com/dmitriy-kip/TestMvpMovies/tree/release_1.0.0) branch in the root folder**
+
 Version 1.0.0
 * List of movies with filter
 * Detailed information about the film
